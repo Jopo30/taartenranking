@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <title>Taartenranking</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
@@ -12,111 +12,156 @@
   --bd:rgba(44,26,14,0.12);--sh:0 2px 20px rgba(44,26,14,0.08);--shh:0 8px 40px rgba(44,26,14,0.14);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dk);min-height:100vh;}
-nav{background:var(--dk);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100;}
-.logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--goldl);}
-.tabs{display:flex;gap:3px;}
-.tab{background:none;border:none;color:rgba(245,228,176,0.5);font-family:'DM Sans',sans-serif;font-size:13px;padding:5px 13px;border-radius:20px;cursor:pointer;transition:all .2s;}
-.tab:hover{color:var(--goldl);background:rgba(255,255,255,0.07);}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dk);min-height:100vh;-webkit-text-size-adjust:100%;}
+
+/* NAV */
+nav{background:var(--dk);padding:0 1rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100;}
+.logo{font-family:'Playfair Display',serif;font-size:17px;color:var(--goldl);}
+.tabs{display:flex;gap:2px;}
+.tab{background:none;border:none;color:rgba(245,228,176,0.5);font-family:'DM Sans',sans-serif;font-size:12px;padding:5px 10px;border-radius:20px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.tab:hover{color:var(--goldl);}
 .tab.on{color:var(--dk);background:var(--goldl);font-weight:500;}
+
+/* PAGES */
 .page{display:none;}.page.on{display:block;}
-.hero{background:var(--dk);padding:3rem 1.5rem 2rem;text-align:center;}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,46px);color:var(--goldl);margin-bottom:.4rem;}
-.hero p{font-size:14px;color:rgba(245,228,176,0.55);font-weight:300;}
-.wrap{max-width:760px;margin:0 auto;padding:1.5rem 1.25rem 4rem;}
-.card{background:var(--warm);border:1px solid var(--bd);border-radius:16px;padding:1.5rem;box-shadow:var(--sh);margin-bottom:14px;}
-.lbl{display:block;font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);margin-bottom:5px;}
+
+/* HERO */
+.hero{background:var(--dk);padding:2rem 1rem 1.5rem;text-align:center;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,6vw,42px);color:var(--goldl);margin-bottom:.3rem;}
+.hero p{font-size:13px;color:rgba(245,228,176,0.55);font-weight:300;}
+
+/* LAYOUT */
+.wrap{max-width:680px;margin:0 auto;padding:1rem 1rem 5rem;}
+.card{background:var(--warm);border:1px solid var(--bd);border-radius:14px;padding:1.25rem;box-shadow:var(--sh);margin-bottom:12px;}
+.card-title{font-size:14px;font-weight:500;margin-bottom:12px;color:var(--dk);}
+
+/* FORM */
+.lbl{display:block;font-size:11px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--mid);margin-bottom:5px;}
 .bdg{font-size:10px;background:var(--blush);color:var(--mid);padding:1px 6px;border-radius:20px;text-transform:none;letter-spacing:0;margin-left:4px;vertical-align:middle;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
-.frow.full{grid-template-columns:1fr;}.frow.tri{grid-template-columns:1fr 1fr 1fr;}
-@media(max-width:520px){.frow,.frow.tri{grid-template-columns:1fr;}}
-input[type=text]{width:100%;height:40px;padding:0 12px;border:1px solid var(--bd);border-radius:10px;background:var(--cream);color:var(--dk);font-family:'DM Sans',sans-serif;font-size:14px;transition:border-color .2s;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.frow.full{grid-template-columns:1fr;}
+.frow.tri{grid-template-columns:1fr 1fr 1fr;}
+@media(max-width:480px){.frow{grid-template-columns:1fr;}.frow.tri{grid-template-columns:1fr;}}
+
+input[type=text]{width:100%;height:42px;padding:0 12px;border:1px solid var(--bd);border-radius:10px;background:var(--cream);color:var(--dk);font-family:'DM Sans',sans-serif;font-size:15px;transition:border-color .2s;-webkit-appearance:none;}
 input[type=text]:focus{outline:none;border-color:var(--lt);box-shadow:0 0 0 3px rgba(196,149,106,.15);}
-.srow{display:flex;align-items:center;gap:10px;margin-top:4px;}
-input[type=range]{-webkit-appearance:none;width:100%;height:5px;border-radius:3px;background:var(--bd);outline:none;cursor:pointer;}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--dk);border:3px solid var(--warm);box-shadow:0 1px 5px rgba(44,26,14,.2);cursor:pointer;}
-.sval{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--dk);min-width:32px;text-align:right;}
-.btn{width:100%;height:46px;background:var(--dk);color:var(--goldl);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s,transform .15s;margin-top:6px;}
-.btn:hover{background:var(--mid);}.btn:active{transform:scale(.99);}.btn:disabled{opacity:.45;cursor:not-allowed;}
-.btn.sm{width:auto;padding:0 20px;height:40px;font-size:13px;}
+
+/* SLIDER */
+.srow{display:flex;align-items:center;gap:10px;margin-top:6px;}
+.slider-wrap{flex:1;}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--bd);outline:none;cursor:pointer;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--dk);border:3px solid var(--warm);box-shadow:0 1px 5px rgba(44,26,14,.2);cursor:pointer;}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--dk);border:3px solid var(--warm);cursor:pointer;}
+.sval{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--dk);min-width:38px;text-align:right;}
+
+/* BUTTONS */
+.btn{width:100%;height:48px;background:var(--dk);color:var(--goldl);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;transition:background .2s;margin-top:8px;-webkit-appearance:none;}
+.btn:hover{background:var(--mid);}
+.btn:active{opacity:.85;}
+.btn:disabled{opacity:.45;cursor:not-allowed;}
+.btn.sm{width:auto;padding:0 20px;height:42px;font-size:14px;}
+.btn-danger{background:none;border:1px solid rgba(176,58,46,.3);color:#B03A2E;border-radius:8px;padding:8px 16px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;}
+
 .err{font-size:12px;color:#B03A2E;margin-top:6px;display:none;}
-.formula{display:inline-flex;align-items:center;background:var(--goldl);color:var(--mid);font-size:12px;font-weight:500;padding:4px 14px;border-radius:20px;margin-bottom:1.25rem;}
-.stats{display:flex;gap:10px;margin-bottom:1.25rem;flex-wrap:wrap;}
-.stat{background:var(--warm);border:1px solid var(--bd);border-radius:12px;padding:9px 16px;font-size:12px;color:var(--mid);box-shadow:var(--sh);}
+.formula{display:inline-flex;align-items:center;background:var(--goldl);color:var(--mid);font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;margin-bottom:1rem;}
+.divider{border:none;border-top:1px solid var(--bd);margin:1rem 0;}
+
+/* CAKE PICKER */
+.cake-picker{display:flex;flex-wrap:wrap;gap:8px;}
+.cake-btn{padding:8px 14px;border-radius:22px;border:1px solid var(--bd);background:var(--cream);color:var(--mid);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:8px;text-align:left;}
+.cake-btn:hover{border-color:var(--lt);color:var(--dk);}
+.cake-btn.sel{background:var(--dk);color:var(--goldl);border-color:var(--dk);}
+.cake-btn img{width:28px;height:28px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.cake-btn .cb-placeholder{width:28px;height:28px;border-radius:50%;background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.cake-sub{font-size:11px;opacity:.6;display:block;}
+.maker-box{min-height:42px;display:flex;align-items:center;padding:0 12px;background:var(--cream);border:1px solid var(--bd);border-radius:10px;font-size:14px;color:var(--mid);gap:10px;}
+.maker-box img{width:32px;height:32px;border-radius:8px;object-fit:cover;}
+
+/* PHOTO UPLOAD */
+.photo-upload{position:relative;cursor:pointer;}
+.photo-upload input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.photo-btn{width:100%;height:42px;border:1px dashed var(--bd);border-radius:10px;background:var(--cream);color:var(--mid);font-family:'DM Sans',sans-serif;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:border-color .2s;}
+.photo-btn:hover{border-color:var(--lt);}
+.photo-preview{width:100%;height:120px;border-radius:10px;object-fit:cover;margin-top:6px;display:none;}
+
+/* STATS */
+.stats{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;}
+.stat{background:var(--warm);border:1px solid var(--bd);border-radius:12px;padding:8px 14px;font-size:12px;color:var(--mid);box-shadow:var(--sh);}
 .stat strong{font-family:'Playfair Display',serif;font-size:18px;color:var(--dk);display:block;}
-.rcard{background:var(--warm);border:1px solid var(--bd);border-radius:16px;padding:1rem 1.25rem;margin-bottom:10px;display:flex;align-items:flex-start;gap:14px;box-shadow:var(--sh);transition:box-shadow .2s;}
-.rcard:hover{box-shadow:var(--shh);}
-.rcard.r1{border-left:4px solid var(--gold);border-radius:0 16px 16px 0;}
-.rcard.r2{border-left:4px solid #B0B0B0;border-radius:0 16px 16px 0;}
-.rcard.r3{border-left:4px solid var(--blushd);border-radius:0 16px 16px 0;}
-.rnum{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;min-width:36px;line-height:1;padding-top:2px;color:rgba(44,26,14,.2);}
+
+/* RANKING CARDS */
+.rcard{background:var(--warm);border:1px solid var(--bd);border-radius:14px;padding:1rem;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;box-shadow:var(--sh);}
+.rcard.r1{border-left:4px solid var(--gold);border-radius:0 14px 14px 0;}
+.rcard.r2{border-left:4px solid #B0B0B0;border-radius:0 14px 14px 0;}
+.rcard.r3{border-left:4px solid var(--blushd);border-radius:0 14px 14px 0;}
+.rnum{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;min-width:32px;line-height:1;padding-top:3px;color:rgba(44,26,14,.2);}
 .r1 .rnum{color:var(--gold);}.r2 .rnum{color:#B0B0B0;}.r3 .rnum{color:var(--blushd);}
-.rname{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--dk);margin-bottom:2px;}
-.rmeta{font-size:12px;color:var(--lt);margin-bottom:8px;}
-.bars{display:flex;gap:10px;flex-wrap:wrap;}
+.rcake-img{width:52px;height:52px;border-radius:10px;object-fit:cover;flex-shrink:0;}
+.rcake-placeholder{width:52px;height:52px;border-radius:10px;background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.rinfo{flex:1;min-width:0;}
+.rname{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--dk);margin-bottom:1px;}
+.rmeta{font-size:11px;color:var(--lt);margin-bottom:7px;}
+.bars{display:flex;gap:8px;flex-wrap:wrap;}
 .bi{font-size:11px;color:var(--mid);}
-.bl{display:flex;justify-content:space-between;gap:6px;margin-bottom:2px;}
-.bt{width:88px;height:4px;background:var(--cream);border-radius:2px;overflow:hidden;}
+.bl{display:flex;justify-content:space-between;gap:4px;margin-bottom:2px;}
+.bt{width:80px;height:3px;background:var(--cream);border-radius:2px;overflow:hidden;}
 .bf{height:100%;border-radius:2px;}
 .bp .bf{background:#378ADD;}.bs .bf{background:var(--blushd);}.bc .bf{background:var(--sage);}
 .vcnt{font-size:11px;color:var(--lt);margin-top:5px;}
-.fscore{font-size:32px;font-weight:700;font-family:'Playfair Display',serif;color:var(--dk);line-height:1;text-align:right;}
-.fsl{font-size:11px;color:var(--lt);text-align:right;}
-.empty{text-align:center;padding:3rem 1rem;color:var(--lt);font-size:14px;}
-.tag{display:inline-flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--bd);border-radius:20px;padding:4px 8px 4px 12px;font-size:13px;color:var(--mid);margin:3px;}
-.tag button{background:none;border:none;cursor:pointer;color:var(--lt);font-size:12px;line-height:1;padding:0 2px;transition:color .15s;}
+.fscore-wrap{text-align:right;flex-shrink:0;}
+.fscore{font-size:28px;font-weight:700;font-family:'Playfair Display',serif;color:var(--dk);line-height:1;}
+.fsl{font-size:11px;color:var(--lt);}
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--lt);font-size:14px;line-height:1.6;}
+
+/* TAGS */
+.tag{display:inline-flex;align-items:center;gap:5px;background:var(--cream);border:1px solid var(--bd);border-radius:20px;padding:4px 8px 4px 10px;font-size:13px;color:var(--mid);margin:3px;}
+.tag button{background:none;border:none;cursor:pointer;color:var(--lt);font-size:12px;line-height:1;padding:0 2px;}
 .tag button:hover{color:#B03A2E;}
-.cake-btn{padding:7px 14px;border-radius:22px;border:1px solid var(--bd);background:var(--cream);color:var(--mid);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:5px;margin:3px;}
-.cake-btn:hover{border-color:var(--lt);color:var(--dk);}
-.cake-btn.sel{background:var(--dk);color:var(--goldl);border-color:var(--dk);}
-.maker-box{min-height:40px;display:flex;align-items:center;padding:0 12px;background:var(--cream);border:1px solid var(--bd);border-radius:10px;font-size:14px;color:var(--mid);}
-.divider{border:none;border-top:1px solid var(--bd);margin:1.25rem 0;}
+
+/* ADMIN TABLE */
+.adm-tbl{width:100%;border-collapse:collapse;font-size:12px;}
+.adm-tbl th{padding:5px 6px;font-weight:500;text-align:left;border-bottom:1px solid var(--bd);color:var(--mid);}
+.adm-tbl td{padding:5px 6px;border-bottom:1px solid var(--bd);vertical-align:middle;}
+
+/* SPINNER */
 .spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp .6s linear infinite;vertical-align:middle;margin-right:5px;}
 @keyframes sp{to{transform:rotate(360deg);}}
-.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(70px);background:var(--dk);color:var(--goldl);font-size:13px;padding:9px 20px;border-radius:30px;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:999;pointer-events:none;}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dk);color:var(--goldl);font-size:13px;padding:10px 20px;border-radius:30px;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .3s cubic-bezier(.34,1.56,.64,1);z-index:999;pointer-events:none;white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
-.adm-tbl{width:100%;border-collapse:collapse;font-size:12px;}
-.adm-tbl th{padding:5px 8px;font-weight:500;text-align:left;border-bottom:1px solid var(--bd);color:var(--mid);}
-.adm-tbl td{padding:5px 8px;border-bottom:1px solid var(--bd);}
-.config-banner{background:var(--goldl);border:1px solid rgba(212,165,58,.4);border-radius:12px;padding:1rem 1.25rem;margin-bottom:1.25rem;font-size:13px;color:var(--mid);}
-.config-banner strong{display:block;font-size:14px;color:var(--dk);margin-bottom:4px;}
-code{font-family:monospace;font-size:12px;background:rgba(44,26,14,.08);padding:1px 5px;border-radius:4px;}
+
+/* PREVIEW SCORE */
+.preview-score{text-align:center;padding:.5rem 0;font-size:13px;color:var(--lt);background:var(--cream);border-radius:10px;margin:.75rem 0;}
+.preview-score strong{font-family:'Playfair Display',serif;font-size:22px;color:var(--dk);}
 </style>
 </head>
 <body>
 
 <script>
-// ============================================================
-//  VEREISTE INSTELLING — VERANDER DEZE 2 REGELS
-// ============================================================
-const JSONBIN_API_KEY = "$2a$10$5ZInIgVhDs1JyTUDqTsYGekjtrN5i/dh8hMn3Mn3PocfbxQNf.w96";   // plak hier jouw JSONBin Secret Key
-const JSONBIN_BIN_ID  = "69f63e4f856a6821899b7252";    // plak hier jouw Bin ID
-// ============================================================
+const JSONBIN_API_KEY    = "$2a$10$5ZInIgVhDs1JyTUDqTsYGekjtrN5i/dh8hMn3Mn3PocfbxQNf.w96";
+const JSONBIN_BIN_ID     = "69f63e4f856a6821899b7252";
+const BASE    = "https://api.jsonbin.io/v3/b/" + JSONBIN_BIN_ID;
+const HEADERS = {"Content-Type":"application/json","X-Master-Key":JSONBIN_API_KEY};
 
-const BASE = "https://api.jsonbin.io/v3/b/" + JSONBIN_BIN_ID;
-const HEADERS = { "Content-Type":"application/json", "X-Master-Key": JSONBIN_API_KEY };
-
-let db = { cakes:[], votes:[] };
+let db = {cakes:[], votes:[]};
 let selCake = null;
+let photoData = null;
 let saving = false;
 
 async function dbLoad(){
-  const r = await fetch(BASE + "/latest", { headers: HEADERS });
+  const r = await fetch(BASE+"/latest", {headers:HEADERS});
   if(!r.ok) throw new Error("Laden mislukt ("+r.status+")");
-  const j = await r.json();
-  db = j.record;
+  db = (await r.json()).record;
+  if(!db.cakes) db.cakes=[];
+  if(!db.votes) db.votes=[];
 }
-
 async function dbSave(){
   if(saving) return;
-  saving = true;
-  const r = await fetch(BASE, { method:"PUT", headers: HEADERS, body: JSON.stringify(db) });
-  saving = false;
+  saving=true;
+  const r = await fetch(BASE, {method:"PUT", headers:HEADERS, body:JSON.stringify(db)});
+  saving=false;
   if(!r.ok) throw new Error("Opslaan mislukt ("+r.status+")");
-}
-
-function isConfigured(){
-  return JSONBIN_API_KEY !== "JOUW_API_KEY_HIER" && JSONBIN_BIN_ID !== "JOUW_BIN_ID_HIER";
 }
 </script>
 
@@ -133,7 +178,6 @@ function isConfigured(){
 <div id="pg-ranking" class="page on">
   <div class="hero"><h1>Taartenranking</h1><p>Wie bakt de beste taart op kantoor?</p></div>
   <div class="wrap">
-    <div id="config-warn-r"></div>
     <div class="stats" id="stats"></div>
     <div id="ranking-list"><div class="empty">Laden...</div></div>
   </div>
@@ -143,12 +187,11 @@ function isConfigured(){
 <div id="pg-stem" class="page">
   <div class="hero"><h1>Beoordeel een taart</h1><p>Geef jouw eerlijke mening</p></div>
   <div class="wrap">
-    <div id="config-warn-s"></div>
     <div class="formula">Eindcijfer = (presentatie + smaak × 2 + creativiteit) ÷ 4</div>
     <div class="card">
       <div style="margin-bottom:14px;">
         <span class="lbl">Selecteer taart</span>
-        <div id="cake-picker"></div>
+        <div class="cake-picker" id="cake-picker"></div>
         <div id="no-cakes" style="display:none;font-size:13px;color:var(--lt);padding:10px;background:var(--cream);border-radius:10px;border:1px solid var(--bd);">Nog geen taarten. Voeg ze toe via Beheer.</div>
       </div>
       <div id="maker-wrap" style="display:none;margin-bottom:14px;">
@@ -156,17 +199,24 @@ function isConfigured(){
         <div class="maker-box" id="maker-disp"></div>
       </div>
       <div class="frow full" style="margin-bottom:14px;">
-        <div><span class="lbl">Jouw naam</span><input type="text" id="inp-naam" placeholder="bijv. Mark"/></div>
+        <div><span class="lbl">Jouw naam</span><input type="text" id="inp-naam" placeholder="bijv. Mark" autocomplete="name"/></div>
       </div>
       <div class="divider"></div>
       <div class="frow tri">
-        <div><span class="lbl">Presentatie</span><div class="srow"><input type="range" min="0" max="10" step="0.5" value="5" id="sl-p" oninput="sl('p')"><div class="sval" id="vp">5</div></div></div>
-        <div><span class="lbl">Smaak <span class="bdg">×2</span></span><div class="srow"><input type="range" min="0" max="10" step="0.5" value="5" id="sl-s" oninput="sl('s')"><div class="sval" id="vs">5</div></div></div>
-        <div><span class="lbl">Creativiteit</span><div class="srow"><input type="range" min="0" max="10" step="0.5" value="5" id="sl-c" oninput="sl('c')"><div class="sval" id="vc">5</div></div></div>
+        <div>
+          <span class="lbl">Presentatie</span>
+          <div class="srow"><div class="slider-wrap"><input type="range" min="0" max="10" step="0.1" value="5" id="sl-p" oninput="sl('p')"></div><div class="sval" id="vp">5.0</div></div>
+        </div>
+        <div>
+          <span class="lbl">Smaak <span class="bdg">×2</span></span>
+          <div class="srow"><div class="slider-wrap"><input type="range" min="0" max="10" step="0.1" value="5" id="sl-s" oninput="sl('s')"></div><div class="sval" id="vs">5.0</div></div>
+        </div>
+        <div>
+          <span class="lbl">Creativiteit</span>
+          <div class="srow"><div class="slider-wrap"><input type="range" min="0" max="10" step="0.1" value="5" id="sl-c" oninput="sl('c')"></div><div class="sval" id="vc">5.0</div></div>
+        </div>
       </div>
-      <div style="text-align:center;padding:.4rem 0;font-size:13px;color:var(--lt);">
-        Eindcijfer: <strong id="prev" style="font-family:'Playfair Display',serif;font-size:20px;color:var(--dk);">5.0</strong> / 10
-      </div>
+      <div class="preview-score">Eindcijfer: <strong id="prev">5.0</strong> / 10</div>
       <div class="err" id="stem-err">Selecteer een taart en vul jouw naam in.</div>
       <button class="btn" id="stem-btn" onclick="submitStem()">Beoordeling opslaan</button>
     </div>
@@ -177,32 +227,40 @@ function isConfigured(){
 <div id="pg-admin" class="page">
   <div class="hero"><h1>Beheer</h1><p>Taarten registreren en beoordelingen beheren</p></div>
   <div class="wrap">
-    <div id="config-warn-a"></div>
-
     <div class="card">
-      <div style="font-size:15px;font-weight:500;margin-bottom:12px;">Nieuwe taart registreren</div>
-      <div class="frow" style="margin-bottom:10px;">
+      <div class="card-title">Nieuwe taart registreren</div>
+      <div class="frow">
         <div><span class="lbl">Naam taart</span><input type="text" id="adm-naam" placeholder="bijv. Chocoladetaart"/></div>
         <div><span class="lbl">Gemaakt door</span><input type="text" id="adm-maker" placeholder="bijv. Sarah"/></div>
+      </div>
+      <div class="frow full">
+        <div>
+          <span class="lbl">Foto (optioneel)</span>
+          <div class="photo-upload">
+            <div class="photo-btn" id="photo-btn-label">📷 Foto toevoegen</div>
+            <input type="file" id="adm-foto" accept="image/*" onchange="previewPhoto()"/>
+          </div>
+          <img id="photo-preview" class="photo-preview" alt="preview"/>
+        </div>
       </div>
       <div class="err" id="adm-err" style="margin-bottom:6px;">Vul naam en maker in.</div>
       <button class="btn sm" id="adm-btn" onclick="regCake()">Taart toevoegen</button>
     </div>
 
     <div class="card">
-      <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Geregistreerde taarten</div>
+      <div class="card-title">Geregistreerde taarten</div>
       <div id="cake-tags"><div style="font-size:13px;color:var(--lt);">Laden...</div></div>
     </div>
 
     <div class="card">
-      <div style="font-size:15px;font-weight:500;margin-bottom:10px;">Alle beoordelingen</div>
-      <div id="votes-tbl" style="max-height:300px;overflow-y:auto;"></div>
+      <div class="card-title">Alle beoordelingen</div>
+      <div id="votes-tbl" style="max-height:280px;overflow-y:auto;overflow-x:auto;"></div>
     </div>
 
     <div class="card">
-      <div style="font-size:15px;font-weight:500;margin-bottom:6px;">Gevaarlijke zone</div>
+      <div class="card-title">Gevaarlijke zone</div>
       <p style="font-size:13px;color:var(--mid);margin-bottom:10px;">Verwijder alle taarten en beoordelingen.</p>
-      <button onclick="resetAll()" style="background:none;border:1px solid rgba(176,58,46,.3);color:#B03A2E;border-radius:8px;padding:7px 16px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;">Alles wissen</button>
+      <button class="btn-danger" onclick="resetAll()">Alles wissen</button>
     </div>
   </div>
 </div>
@@ -221,13 +279,12 @@ function go(p){
   if(p==='admin') initAdmin();
 }
 
-function fmt(n){const v=Math.round(n*10)/10;return v%1===0?v.toString():v.toFixed(1);}
+function fmt(n){
+  const v=Math.round(n*10)/10;
+  return v%1===0?v.toFixed(1):v.toFixed(1);
+}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
-
-function configBanner(){
-  return `<div class="config-banner"><strong>Instelling vereist</strong>Open dit HTML-bestand in een teksteditor en vervang <code>JOUW_API_KEY_HIER</code> en <code>JOUW_BIN_ID_HIER</code> bovenaan het bestand door jouw JSONBin gegevens. Zie de instructies hieronder.</div>`;
-}
 
 function sl(id){
   const v=parseFloat(document.getElementById('sl-'+id).value);
@@ -238,14 +295,23 @@ function sl(id){
   document.getElementById('prev').textContent=fmt((p+s*2+c)/4);
 }
 
+function previewPhoto(){
+  const file=document.getElementById('adm-foto').files[0];
+  if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    photoData=e.target.result;
+    const prev=document.getElementById('photo-preview');
+    prev.src=photoData;prev.style.display='block';
+    document.getElementById('photo-btn-label').textContent='📷 Foto wijzigen';
+  };
+  reader.readAsDataURL(file);
+}
+
 async function initRanking(){
-  if(!isConfigured()){document.getElementById('config-warn-r').innerHTML=configBanner();document.getElementById('ranking-list').innerHTML='';return;}
-  document.getElementById('config-warn-r').innerHTML='';
   document.getElementById('ranking-list').innerHTML='<div class="empty">Laden...</div>';
-  try{
-    await dbLoad();
-    renderRanking();
-  }catch(e){document.getElementById('ranking-list').innerHTML='<div class="empty">Kon data niet laden: '+e.message+'</div>';}
+  try{await dbLoad();renderRanking();}
+  catch(e){document.getElementById('ranking-list').innerHTML='<div class="empty">Kon data niet laden.<br>'+e.message+'</div>';}
 }
 
 function renderRanking(){
@@ -253,24 +319,29 @@ function renderRanking(){
   const sr=document.getElementById('stats');
   const map={};
   db.votes.forEach(v=>{
-    if(!map[v.cakeId])map[v.cakeId]={naam:v.naam,maker:v.maker,vs:[]};
+    if(!map[v.cakeId])map[v.cakeId]={naam:v.naam,maker:v.maker,foto:v.foto||null,vs:[]};
     map[v.cakeId].vs.push(v);
   });
   const groups=Object.values(map).map(g=>{
     const a=f=>g.vs.reduce((s,v)=>s+v.scores[f],0)/g.vs.length;
     const p=a('p'),s=a('s'),c=a('c');
-    return{...g,avg:{p,s,c},score:Math.round(((p+s*2+c)/4)*100)/100,cnt:g.vs.length};
+    return{...g,avg:{p,s,c},score:Math.round(((p+s*2+c)/4)*100)/10/10,cnt:g.vs.length};
   }).sort((a,b)=>b.score-a.score);
 
   sr.innerHTML=`<div class="stat"><strong>${db.cakes.length}</strong>taarten</div><div class="stat"><strong>${db.votes.length}</strong>beoordelingen</div>${groups.length>0?`<div class="stat"><strong>${esc(groups[0].naam)}</strong>beste taart</div>`:''}`;
 
   if(groups.length===0){list.innerHTML='<div class="empty">Nog geen beoordelingen.<br>Ga naar <strong>Beheer</strong> om taarten toe te voegen,<br>dan naar <strong>Beoordeel</strong> om te stemmen.</div>';return;}
+
   list.innerHTML=groups.map((g,i)=>{
     const rc=i===0?'r1':i===1?'r2':i===2?'r3':'';
     const med=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
+    const imgHtml=g.foto
+      ?`<img src="${g.foto}" class="rcake-img" alt="${esc(g.naam)}">`
+      :`<div class="rcake-placeholder">🎂</div>`;
     return`<div class="rcard ${rc}">
       <div class="rnum">${med}</div>
-      <div style="flex:1;min-width:0;">
+      ${imgHtml}
+      <div class="rinfo">
         <div class="rname">${esc(g.naam)}</div>
         <div class="rmeta">door ${esc(g.maker)}</div>
         <div class="bars">
@@ -280,15 +351,13 @@ function renderRanking(){
         </div>
         <div class="vcnt">${g.cnt} beoordeling${g.cnt!==1?'en':''}</div>
       </div>
-      <div><div class="fscore">${fmt(g.score)}</div><div class="fsl">/ 10</div></div>
+      <div class="fscore-wrap"><div class="fscore">${fmt(g.score)}</div><div class="fsl">/ 10</div></div>
     </div>`;
   }).join('');
 }
 
 async function initStem(){
-  if(!isConfigured()){document.getElementById('config-warn-s').innerHTML=configBanner();return;}
-  document.getElementById('config-warn-s').innerHTML='';
-  try{ await dbLoad(); }catch(e){showToast('Fout bij laden: '+e.message);return;}
+  try{await dbLoad();}catch(e){showToast('Fout bij laden: '+e.message);return;}
   renderPicker();
 }
 
@@ -296,18 +365,31 @@ function renderPicker(){
   const picker=document.getElementById('cake-picker');
   const noEl=document.getElementById('no-cakes');
   if(db.cakes.length===0){picker.style.display='none';noEl.style.display='block';return;}
-  picker.style.display='flex';picker.style.flexWrap='wrap';
-  noEl.style.display='none';
-  picker.innerHTML=db.cakes.map(c=>`<button class="cake-btn${selCake===c.id?' sel':''}" onclick="pickCake('${c.id}')">${esc(c.naam)}<span style="font-size:11px;opacity:.6;margin-left:3px;">· ${esc(c.maker)}</span></button>`).join('');
+  picker.style.display='flex';noEl.style.display='none';
+  picker.innerHTML=db.cakes.map(c=>{
+    const imgHtml=c.foto
+      ?`<img src="${c.foto}" alt="${esc(c.naam)}">`
+      :`<div class="cb-placeholder">🎂</div>`;
+    return`<button class="cake-btn${selCake===c.id?' sel':''}" onclick="pickCake('${c.id}')">
+      ${imgHtml}
+      <span><span style="font-size:13px;font-weight:500;">${esc(c.naam)}</span><span class="cake-sub">${esc(c.maker)}</span></span>
+    </button>`;
+  }).join('');
+  updateMaker();
+}
+
+function pickCake(id){selCake=selCake===id?null:id;renderPicker();}
+
+function updateMaker(){
   const w=document.getElementById('maker-wrap');
   const d=document.getElementById('maker-disp');
   if(!selCake){w.style.display='none';return;}
   const cake=db.cakes.find(c=>c.id===selCake);
   if(!cake){w.style.display='none';return;}
-  w.style.display='block';d.textContent='door '+cake.maker;
+  w.style.display='block';
+  const imgHtml=cake.foto?`<img src="${cake.foto}" style="width:32px;height:32px;border-radius:8px;object-fit:cover;">`:'';
+  d.innerHTML=imgHtml+'<span>door '+esc(cake.maker)+'</span>';
 }
-
-function pickCake(id){selCake=selCake===id?null:id;renderPicker();}
 
 async function submitStem(){
   const naam=document.getElementById('inp-naam').value.trim();
@@ -324,11 +406,11 @@ async function submitStem(){
     const s=parseFloat(document.getElementById('sl-s').value);
     const c=parseFloat(document.getElementById('sl-c').value);
     const score=Math.round(((p+s*2+c)/4)*100)/100;
-    db.votes.push({id:Date.now(),cakeId:cake.id,naam:cake.naam,maker:cake.maker,beoordelaar:naam,scores:{p,s,c},score,datum:new Date().toLocaleDateString('nl-NL')});
+    db.votes.push({id:Date.now(),cakeId:cake.id,naam:cake.naam,maker:cake.maker,foto:cake.foto||null,beoordelaar:naam,scores:{p,s,c},score,datum:new Date().toLocaleDateString('nl-NL')});
     await dbSave();
     document.getElementById('inp-naam').value='';
     selCake=null;
-    ['p','s','c'].forEach(id=>{document.getElementById('sl-'+id).value=5;document.getElementById('v'+id).textContent='5';});
+    ['p','s','c'].forEach(id=>{document.getElementById('sl-'+id).value=5;document.getElementById('v'+id).textContent='5.0';});
     document.getElementById('prev').textContent='5.0';
     renderPicker();
     showToast('Beoordeling opgeslagen! 🎂');
@@ -338,16 +420,17 @@ async function submitStem(){
 }
 
 async function initAdmin(){
-  if(!isConfigured()){document.getElementById('config-warn-a').innerHTML=configBanner();document.getElementById('cake-tags').innerHTML='';document.getElementById('votes-tbl').innerHTML='';return;}
-  document.getElementById('config-warn-a').innerHTML='';
-  try{ await dbLoad(); }catch(e){showToast('Fout bij laden: '+e.message);return;}
+  try{await dbLoad();}catch(e){showToast('Fout bij laden: '+e.message);return;}
   renderCakeTags();renderVotesTbl();
 }
 
 function renderCakeTags(){
   const el=document.getElementById('cake-tags');
   if(db.cakes.length===0){el.innerHTML='<div style="font-size:13px;color:var(--lt);">Nog geen taarten.</div>';return;}
-  el.innerHTML=db.cakes.map(c=>`<span class="tag"><strong style="font-size:13px;">${esc(c.naam)}</strong><span style="font-size:12px;color:var(--lt);">· ${esc(c.maker)}</span><button onclick="deleteCake('${c.id}')">✕</button></span>`).join('');
+  el.innerHTML=db.cakes.map(c=>{
+    const imgHtml=c.foto?`<img src="${c.foto}" style="width:28px;height:28px;border-radius:6px;object-fit:cover;">`:'🎂';
+    return`<span class="tag">${imgHtml}<strong style="font-size:13px;">${esc(c.naam)}</strong><span style="font-size:12px;color:var(--lt);">· ${esc(c.maker)}</span><button onclick="deleteCake('${c.id}')">✕</button></span>`;
+  }).join('');
 }
 
 function renderVotesTbl(){
@@ -366,12 +449,16 @@ async function regCake(){
   btn.disabled=true;btn.innerHTML='<span class="spin"></span>Opslaan...';
   try{
     await dbLoad();
-    db.cakes.push({id:String(Date.now()),naam,maker});
+    db.cakes.push({id:String(Date.now()),naam,maker,foto:photoData||null});
     await dbSave();
     document.getElementById('adm-naam').value='';
     document.getElementById('adm-maker').value='';
+    document.getElementById('photo-preview').style.display='none';
+    document.getElementById('photo-btn-label').textContent='📷 Foto toevoegen';
+    document.getElementById('adm-foto').value='';
+    photoData=null;
     renderCakeTags();
-    showToast('Taart toegevoegd!');
+    showToast('Taart toegevoegd! 🎂');
   }catch(e){showToast('Fout: '+e.message);}
   btn.disabled=false;btn.innerHTML='Taart toevoegen';
 }
@@ -395,7 +482,9 @@ async function resetAll(){
   if(!confirm('Alles wissen? Dit kan niet ongedaan worden gemaakt.'))return;
   db={cakes:[],votes:[]};
   await dbSave();
-  selCake=null;renderCakeTags();renderVotesTbl();showToast('Alles gewist.');
+  selCake=null;photoData=null;
+  renderCakeTags();renderVotesTbl();
+  showToast('Alles gewist.');
 }
 
 initRanking();
